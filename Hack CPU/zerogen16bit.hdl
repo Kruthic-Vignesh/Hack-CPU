@@ -1,0 +1,6 @@
+/* Outputs a 16 bit bus with all elements = 0 */
+CHIP zerogen16bit
+{
+    OUT out[16];
+    PARTS:
+}

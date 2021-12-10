@@ -1,0 +1,11 @@
+/* Generates Or of 5 varaibles */
+CHIP Or5
+{
+    IN a, b, c, d, e;
+    OUT out;
+    PARTS:
+    Or(a = a, b = b, out = o1);
+    Or(a = c, b = d, out = o2);
+    Or(a = e, b = o1, out = o3);
+    Or(a = o2, b = o3, out = out);
+}

@@ -1,0 +1,123 @@
+/* 16 bit 2 to 1 multiplexer */
+
+CHIP mux16bit2to1
+{
+    IN a[16], b[16], s;
+    OUT out[16];
+    
+    PARTS:      
+    
+    Not(in = s, out = nots);
+
+    /*0th bit*/
+
+    And(a = a[0], b = nots, out = t00);
+    And(a = b[0], b = s, out = t10);
+
+    Or(a = t00, b = t10, out = out[0]);
+
+    /*1st bit*/
+
+    And(a = a[1], b = nots, out = t01);
+    And(a = b[1], b = s, out = t11);
+
+    Or(a = t01, b = t11, out = out[1]);
+
+    /*2nd bit*/
+
+    And(a = a[2], b = nots, out = t02);
+    And(a = b[2], b = s, out = t12);
+
+    Or(a = t02, b = t12, out = out[2]);
+
+    /*3rd bit*/
+
+    And(a = a[3], b = nots, out = t03);
+    And(a = b[3], b = s, out = t13);
+
+    Or(a = t03, b = t13, out = out[3]);
+
+    /*4th bit*/
+
+    And(a = a[4], b = nots, out = t04);
+    And(a = b[4], b = s, out = t14);
+
+    Or(a = t04, b = t14, out = out[4]);
+
+    /*5th bit*/
+
+    And(a = a[5], b = nots, out = t05);
+    And(a = b[5], b = s, out = t15);
+
+    Or(a = t05, b = t15, out = out[5]);
+
+    /*6th bit*/
+
+    And(a = a[6], b = nots, out = t06);
+    And(a = b[6], b = s, out = t16);
+
+    Or(a = t06, b = t16, out = out[6]);
+
+    /*7th bit*/
+
+    And(a = a[7], b = nots, out = t07);
+    And(a = b[7], b = s, out = t17);
+
+    Or(a = t07, b = t17, out = out[7]);
+
+    /*8th bit*/
+
+    And(a = a[8], b = nots, out = t08);
+    And(a = b[8], b = s, out = t18);
+
+    Or(a = t08, b = t18, out = out[8]);
+
+    /*9th bit*/
+
+    And(a = a[9], b = nots, out = t09);
+    And(a = b[9], b = s, out = t19);
+
+    Or(a = t09, b = t19, out = out[9]);
+
+    /*10th bit*/
+
+    And(a = a[10], b = nots, out = t010);
+    And(a = b[10], b = s, out = t110);
+
+    Or(a = t010, b = t110, out = out[10]);
+
+    /*11th bit*/
+
+    And(a = a[11], b = nots, out = t011);
+    And(a = b[11], b = s, out = t111);
+
+    Or(a = t011, b = t111, out = out[11]);
+
+    /*12th bit*/
+
+    And(a = a[12], b = nots, out = t012);
+    And(a = b[12], b = s, out = t112);
+
+    Or(a = t012, b = t112, out = out[12]);
+
+    /*13th bit*/
+
+    And(a = a[13], b = nots, out = t013);
+    And(a = b[13], b = s, out = t113);
+
+    Or(a = t013, b = t113, out = out[13]);
+
+    /*14th bit*/
+
+    And(a = a[14], b = nots, out = t014);
+    And(a = b[14], b = s, out = t114);
+
+    Or(a = t014, b = t114, out = out[14]);
+
+    /*15th bit*/
+
+    And(a = a[15], b = nots, out = t015);
+    And(a = b[15], b = s, out = t115);
+
+    Or(a = t015, b = t115, out = out[15]);
+}

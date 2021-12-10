@@ -1,0 +1,65 @@
+/* Given a 16 bit bus and a variable b, generates the output of HACKALU(=out1) along with zr variable(=out2) and ng variable(=out3) */
+
+CHIP Xor16zr
+{
+    IN a[16], b;
+    OUT out1[16], out2, out3;  
+
+    PARTS:
+    /* Generating result */
+    Xor(a = a[0], b = b, out = p0);
+    Xor(a = a[1], b = b, out = p1);
+    Xor(a = a[2], b = b, out = p2);
+    Xor(a = a[3], b = b, out = p3);
+    Xor(a = a[4], b = b, out = p4);
+    Xor(a = a[5], b = b, out = p5);
+    Xor(a = a[6], b = b, out = p6);
+    Xor(a = a[7], b = b, out = p7);
+    Xor(a = a[8], b = b, out = p8);
+    Xor(a = a[9], b = b, out = p9);
+    Xor(a = a[10], b = b, out = p10);
+    Xor(a = a[11], b = b, out = p11);
+    Xor(a = a[12], b = b, out = p12);
+    Xor(a = a[13], b = b, out = p13);
+    Xor(a = a[14], b = b, out = p14);
+    Xor(a = a[15], b = b, out = p15);
+
+    /* zr (out2) = 1 if all bits of result are 0, else it is 1 */
+    Or(a = p0, b = p1, out = v1);
+    Or(a = p2, b = p3, out = v2);
+    Or(a = p4, b = p5, out = v3);
+    Or(a = p6, b = p7, out = v4);
+    Or(a = p8, b = p9, out = v5);
+    Or(a = p10, b = p11, out = v6);
+    Or(a = p12, b = p13, out = v7);
+    Or(a = p14, b = p15, out = v8);
+    Or(a = v1, b = v2, out = g1);
+    Or(a = v3, b = v4, out = g2);
+    Or(a = v5, b = v6, out = g3);
+    Or(a = v7, b = v8, out = g4);
+    Or(a = g1, b = g2, out = f1);
+    Or(a = g3, b = g4, out = f2);
+    Or(a = f1, b = f2, out = h1);
+    Not(in = h1, out = out2);
+
+    /* ng (out3) is the sign of the result = p15 */
+    And(a = p15, b = p15, out = out3);
+
+    /* Transferring result to a 16-bit bus */
+    And(a = p0, b = p0, out = out1[0]);
+    And(a = p1, b = p1, out = out1[1]);
+    And(a = p2, b = p2, out = out1[2]);
+    And(a = p3, b = p3, out = out1[3]);
+    And(a = p4, b = p4, out = out1[4]);
+    And(a = p5, b = p5, out = out1[5]);
+    And(a = p6, b = p6, out = out1[6]);
+    And(a = p7, b = p7, out = out1[7]);
+    And(a = p8, b = p8, out = out1[8]);
+    And(a = p9, b = p9, out = out1[9]);
+    And(a = p10, b = p10, out = out1[10]);
+    And(a = p11, b = p11, out = out1[11]);
+    And(a = p12, b = p12, out = out1[12]);
+    And(a = p13, b = p13, out = out1[13]);
+    And(a = p14, b = p14, out = out1[14]);
+    And(a = p15, b = p15, out = out1[15]);
+}

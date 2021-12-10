@@ -1,0 +1,32 @@
+CHIP HACKALU
+{
+    IN x[16], y[16], zx, nx, zy, ny, f, no;
+    OUT out[16], zr, ng;
+
+    PARTS:
+
+    /* Gets a 16 bit bus of zeroes */
+    zerogen16bit(out = pz);
+    /* zx selects between x bus and a bus of zeroes */
+    mux16bit2to1(a = x, b = pz, s = zx, out = pp);
+    /* If nx = 1, output has to be complemented */
+    Xor161(a = pp, b = nx, out = p);
+
+    /* Gets a 16 bit bus of zeroes */
+    zerogen16bit(out = qz);
+    /* zy selects between y bus and a bus of zeroes */
+    mux16bit2to1(a = y, b = qz, s = zy, out = qq);
+    /* If ny = 1, output has to be complemented */
+    Xor161(a = qq, b = ny, out = q);
+
+    /* Computes p + q */
+    adder16bit(x = p, y = q, s = add, of = of);
+    /* Computes p AND q */
+    And16bit(a = p, b = q, out = and);
+
+    /* f variables selects between p AND q and p + q */
+    mux16bit2to1(a = and, b = add, s = f, out = r);
+    /* If no = 1, output has to be complemented */
+    /* Xor16zr computes the output along with the variables zr and ng */
+    Xor16zr(a = r, b = no, out1 = out, out2 = zr, out3 = ng);    
+}
